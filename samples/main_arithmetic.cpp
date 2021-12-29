@@ -1,6 +1,20 @@
-// СЂРµР°Р»РёР·Р°С†РёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ
+#include <iostream>
+#include "arithmetic.h"
+#include "stack.h"
+
+using namespace std;
 
 int main()
 {
-  return 0;
+	setlocale(LC_ALL, "rus");
+	cout << " Введите выражение без пробелов, которые нужно вычислить " << endl;
+	cout << " Переменные вводите без коэффициентов " << endl;
+	cout << "\n\n";
+	string h;
+	arithmetic vr;
+	cin >> h;
+	cout << "\n\n";
+	cout << "\t\t" << vr.tokenizing_and_polish_notation(h);
+
+	cout << "\n\n";
 }
