@@ -1,9 +1,9 @@
-// тесты для вычисления арифметических выражений
+// С‚РµСЃС‚С‹ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРёС… РІС‹СЂР°Р¶РµРЅРёР№
 
 #include "arithmetic.h"
 #include <gtest.h>
 
-TEST(lexeme, сan_create_lexeme_with_positive_value)
+TEST(lexeme, СЃan_create_lexeme_with_positive_value)
 {
 	ASSERT_NO_THROW(lexeme(10));
 }
@@ -85,7 +85,11 @@ TEST(arithmetic, throw_when_expression_isnt_correct_2)
 
 TEST(arithmetic, throw_when_expression_isnt_correct_3)
 {
+<<<<<<< HEAD
+	string a("2+(+5");
+=======
 	string a("2)+(5");
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
 
 	arithmetic r;
 	ASSERT_ANY_THROW(r.tokenizing_and_polish_notation(a));
@@ -101,7 +105,11 @@ TEST(arithmetic, throw_when_expression_isnt_correct_4)
 
 TEST(arithmetic, throw_when_expression_ismt_correct5)
 {
+<<<<<<< HEAD
+	string a(")5+-4(");
+=======
 	string a("5+-4(");
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
 
 	arithmetic r;
 	ASSERT_ANY_THROW(r.tokenizing_and_polish_notation(a));
