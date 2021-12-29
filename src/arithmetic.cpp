@@ -66,9 +66,9 @@ bool  lexeme::operator==(const lexeme& x) const
 
 double arithmetic::tokenizing_and_polish_notation(string& a)
 {
-	// разбиваем выражение на лексемы 
+	// СЂР°Р·Р±РёРІР°РµРј РІС‹СЂР°Р¶РµРЅРёРµ РЅР° Р»РµРєСЃРµРјС‹ 
 	int i = 0, j = 0;
-	int count = 0;   //количество лексем
+	int count = 0;   //РєРѕР»РёС‡РµСЃС‚РІРѕ Р»РµРєСЃРµРј
 	double temp, x, d;
 	lexeme array[1000];
 	while (a[j] != '\0')
@@ -101,6 +101,14 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 			array[i] = x;
 			count++;
 			i++;
+<<<<<<< HEAD
+			if (a[j] != '\0' && (a[j] >= 'a' && a[j] <= 'z' || a[j] >= 'A' && a[j] <= 'Z'))
+			{
+				array[i++] = "*";
+				count++;
+			}
+=======
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
 		}
 
 		else if (a[j] == '+')
@@ -166,7 +174,7 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 		else if (a[j] >= 'A' && a[j] <= 'Z' || a[j] >= 'a' && a[j] <= 'z')
 		{
 			double curr;
-			cout << "Введите значение " << a[j] << endl;
+			cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ " << a[j] << endl;
 			cin >> curr;
 			/*
 			if (i != 0 && !arr[i].isV)
@@ -186,7 +194,7 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 				array[i] = "*";
 				i++;
 				count++;
-				cout << "Введите значение " << a[j] << endl;
+				cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ " << a[j] << endl;
 				cin >> curr;
 				array[i] = curr;
 				count++;
@@ -196,8 +204,8 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 		}
 		else
 		{
-			cout << "Введен некорректный символ: " << a[j] << endl;
-			throw exception("Введен некорректный символ");
+			cout << "Р’РІРµРґРµРЅ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ СЃРёРјРІРѕР»: " << a[j] << endl;
+			throw exception("Р’РІРµРґРµРЅ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ СЃРёРјРІРѕР»");
 		}
 	}
 
@@ -207,7 +215,11 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 	for (int k = 0; k < count; k++)
 	{
 		if (array[k].isValue())
+<<<<<<< HEAD
+			cout << array[k].getValue() << endl;
+=======
 			cout << array[k].getV() << endl;
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
 		else
 			cout << array[k].getOp() << endl;
 	}
@@ -216,10 +228,10 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 
 	if (check(array, count) == 0)
 	{
-		int count2 = count; // count2 будет равен количеству лексем без учета скобок
+		int count2 = count; // count2 Р±СѓРґРµС‚ СЂР°РІРµРЅ РєРѕР»РёС‡РµСЃС‚РІСѓ Р»РµРєСЃРµРј Р±РµР· СѓС‡РµС‚Р° СЃРєРѕР±РѕРє
 
 
-		//обратная польская запись 
+		//РѕР±СЂР°С‚РЅР°СЏ РїРѕР»СЊСЃРєР°СЏ Р·Р°РїРёСЃСЊ 
 		lexeme* array2 = new lexeme[count]{};
 		Stack<lexeme> st;
 		int l = 0;
@@ -279,8 +291,12 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 			l++;
 		}
 
+<<<<<<< HEAD
+		
+=======
 		/*
-		cout << "Обратная польская запись выражения:" << endl;
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
+		cout << "РћР±СЂР°С‚РЅР°СЏ РїРѕР»СЊСЃРєР°СЏ Р·Р°РїРёСЃСЊ РІС‹СЂР°Р¶РµРЅРёСЏ:" << endl;
 		for (int k = 0; k < count2; k++)
 		{
 			if (array2[k].isValue())
@@ -290,8 +306,12 @@ double arithmetic::tokenizing_and_polish_notation(string& a)
 		}
 		cout << "\n\n\n";
 
-		cout << "Результат вычисления: " << endl;
+		cout << "Р РµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ: " << endl;
+<<<<<<< HEAD
+		
+=======
 		*/
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
 		double result = calculate(array2, count2);
 		return result;
 	}
@@ -313,7 +333,7 @@ int arithmetic::check(lexeme* array, int kol)
 		{
 			if (i != kol - 1 && (array[i + 1].getOp() == "un-" || array[i + 1].isValue()))
 			{
-				cout << "После числа стоит небинарный оператор" << endl;
+				cout << "РџРѕСЃР»Рµ С‡РёСЃР»Р° СЃС‚РѕРёС‚ РЅРµР±РёРЅР°СЂРЅС‹Р№ РѕРїРµСЂР°С‚РѕСЂ" << endl;
 				count_of_errors++;
 			}
 		}
@@ -329,31 +349,50 @@ int arithmetic::check(lexeme* array, int kol)
 
 			if (array[i].getOp() == "(" && i == kol - 1)
 			{
-				cout << "В конце выражения стоит недопустимый знак" << endl;
+				cout << "Р’ РєРѕРЅС†Рµ РІС‹СЂР°Р¶РµРЅРёСЏ СЃС‚РѕРёС‚ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№ Р·РЅР°Рє" << endl;
 				count_of_errors++;
 			}
 			else if (array[i].getOp() == "(" && (array[i + 1].getOp() == "+" || array[i + 1].getOp() == "-" || array[i + 1].getOp() == "/" || array->getOp() == "*"))
 			{
-				cout << "После ( стоит недопустимый бинарный оператор" << endl;
+				cout << "РџРѕСЃР»Рµ ( СЃС‚РѕРёС‚ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№ Р±РёРЅР°СЂРЅС‹Р№ РѕРїРµСЂР°С‚РѕСЂ" << endl;
 				count_of_errors++;
 			}
+<<<<<<< HEAD
+			else if (i != kol - 1 && array[i].getOp() != ")" && !array[i + 1].isValue() && array[i + 1].getOp() != "un-" && array[i + 1].getOp() != "(" && array[i + 1].getOp() != ")")
+			{
+				count_of_errors++;
+			}
+			else if (i != kol - 1 && array[i].getOp() == ")" && array[i + 1].getOp() == "un-" && array[i + 1].isValue())
+=======
 			else if (i != kol - 1 && (!array[i + 1].isValue()) && array[i + 1].getOp() != "un-")
 			{
 				count_of_errors++;
 			}
 			else if (i == kol - 1 && array->getOp() != ")")
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
 			{
 				count_of_errors++;
 			}
 		}
+<<<<<<< HEAD
+
+		if (count_of_brackets != 0)
+		{
+			cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РѕС‚РєСЂС‹РІР°СЋС‰РёС…СЃСЏ СЃРєРѕР±РѕРє РЅРµ СЂР°РІРЅРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ Р·Р°РєСЂС‹РІР°СЋС‰РёС…СЃСЏ";
+			count_of_errors++;
+		}
+		return count_of_errors;
+	}
+=======
 	}
 		
 	if (count_of_brackets != 0)
 	{
-		cout << "Количество открывающихся скобок не равно количеству закрывающихся";
+		cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РѕС‚РєСЂС‹РІР°СЋС‰РёС…СЃСЏ СЃРєРѕР±РѕРє РЅРµ СЂР°РІРЅРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ Р·Р°РєСЂС‹РІР°СЋС‰РёС…СЃСЏ";
 		count_of_errors++;
 	}
 	return count_of_errors;
+>>>>>>> cdf2b31cd9bd876f6e3828f405f2f1e7e3bad5d9
 }
 
 double arithmetic::calculate(lexeme* arrt, int kol)
