@@ -1,5 +1,0 @@
-﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
-  arithmetic.cpp
-C:\Users\Ильшат\source\repos\mp2-lab3-arithmetic\src\arithmetic.cpp(362): warning C4715: arithmetic::check: значение возвращается не при всех путях выполнения
-C:\Users\Ильшат\source\repos\mp2-lab3-arithmetic\include\stack.h(136): warning C4715: Stack<lexeme>::peek: значение возвращается не при всех путях выполнения
-  arithmetic.vcxproj -> C:\Users\Ильшат\source\repos\mp2-lab3-arithmetic\sln\vc12\Debug\arithmetic.lib
