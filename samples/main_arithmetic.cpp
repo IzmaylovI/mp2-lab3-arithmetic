@@ -1,81 +1,88 @@
 #include <iostream>
 #include "arithmetic.h"
 #include "stack.h"
-<<<<<<< HEAD
-
-using namespace std;
-=======
->>>>>>> c434110eab1f41d6dfbe87f33a4bdfc0ac00ecef
 
 using namespace std;
 
-//Повторное вычисление этого выражения
-//Если имеются переменные, то им можно присвоить другие значения 
-void povtornoe_vychyslenie_vyrazhenia(lexeme* polish)
+void main_interface();
+
+
+void povtornoe_vychyslenie_vyrazhenia(vector<lexeme> polish)
 {
 	arithmetic vr;
-	cout << vr.calculate(polish, vr.getCounteer());
+	cout << vr.calculate(polish);
+
+	cout << "\n\n";
+
+	cout << " 1) Посчитать это выражение еще раз " << endl;
+	cout << " 2) Вернуться в главное меню" << endl;
+	cout << " 3) Выйти из программы" << endl;
+
+	int p;
+	cout << "  ";
+	cin >> p;
+	cout << "\n";
+
+
+	switch (p)
+	{
+	case 1:
+		povtornoe_vychyslenie_vyrazhenia(polish);
+		break;
+	case 2:
+		main_interface();
+		break;
+	case 3:
+		break;
+	}
 }
 
-lexeme* new_calculating()
+
+
+void new_calculating()
 {
-	cout << " Введите выражение без пробелов, которые нужно вычислить " << endl;
+	cout << " Введите выражение без пробелов, которое нужно вычислить " << endl;
 	cout << " Переменные вводите без коэффициентов " << endl;
 	cout << "\n\n";
 	string h;
 	arithmetic vr;
 	cin >> h;
 	cout << "\n\n";
+	
 	vector<lexeme> tok = vr.tokenizing(h);
-	lexeme* polish = vr.polish_notation(tok);
-	cout << vr.calculate(polish, vr.getCounteer());
+	vector<lexeme> polish = vr.polish_notation(tok);
+	vr.check(tok, tok.size());
+	cout << vr.calculate(polish);
 
-	return polish;
+	cout << "\n\n";
+
+	cout << " 1) Посчитать это выражение еще раз " << endl;
+	cout << " 2) Вернуться в главное меню" << endl;
+	cout << " 3) Выйти из программы" << endl;
+
+	int p;
+	cout << "  ";
+	cin >> p;
+	cout << "\n";
+
+
+	switch (p)
+	{
+	case 1:
+		povtornoe_vychyslenie_vyrazhenia(polish);
+		break;
+	case 2:
+		main_interface();
+		break;
+	case 3:
+		break;
+	}
 }
+
+
 void tokenizing()
 {
-	cout << " Введите выражение без пробелов, которые нужно разбить на лексемы" << endl;
-	cout << " Переменные вводите без коэффициентов " << endl;
-	cout << "\n\n";
-	string h;
-	arithmetic vr;
-	cin >> h;
-	cout << "\n\n";
-	vector<lexeme> tok = vr.tokenizing(h);
-	for (int i = 0; i < tok.size(); i++)
-	{
-		cout << tok[i] << " ";
-	}
-	cout << "\n\n";
-
-
-}
-
-void tokenizng_and_polish_notation()
-{
-	cout << " Введите выражение без пробелов, которые нужно разбить на лексемыи перевести в постфиксную запись" << endl;
-	cout << " Переменные вводите без коэффициентов " << endl;
-	cout << "\n\n";
-	string h;
-	arithmetic vr;
-	cin >> h;
-	cout << "\n\n";
-	vector<lexeme> tok = vr.tokenizing(h);
-	for (int i = 0; i < tok.size(); i++)
-	{
-		cout << tok[i] << " ";
-	}
-
-	lexeme* polish = vr.polish_notation(tok);
-	for (int i = 0; i < vr.getCounteer(); i++)
-	{
-		cout << polish[i] << " ";
-	}
-}
-
-void how_it_works()
-{
-	cout << " Введите выражение без пробелов, которые нужно вычислить " << endl;
+	cout << " Введите выражение без пробелов, которое нужно вычислить " << endl;
 	cout << " Переменные вводите без коэффициентов " << endl;
 	cout << "\n\n";
 	string h;
@@ -85,28 +92,115 @@ void how_it_works()
 	vector<lexeme> tok = vr.tokenizing(h);
 
 	cout << "1) Выражение разбивается на отдельные лексемы" << endl;
-	cout << "   Введенное выражение состоит из следующих лексем: " << endl;
+	cout << "   Введенное выражение состоит из следующих лексем " << endl;
+
 	
 	for (int i = 0; i < tok.size(); i++)
 	{
-		cout << tok[i];
+		cout << tok[i] << " ";
+	}
+	cout << "\n\n";
+}
+
+void tokenizng_and_polish_notation()
+{
+	cout << " Введите выражение без пробелов, которое нужно вычислить " << endl;
+	cout << " Переменные вводите без коэффициентов " << endl;
+	cout << "\n\n";
+	string h;
+	arithmetic vr;
+	cin >> h;
+	cout << "\n\n";
+	vector<lexeme> tok = vr.tokenizing(h);
+	
+	cout << "1) Выражение разбивается на отдельные лексемы" << endl;
+	cout << "   Введенное выражение состоит из следующих лексем " << endl;
+
+
+	for (int i = 0; i < tok.size(); i++)
+	{
+		cout << tok[i] << " ";
 	}
 	cout << "\n\n";
 
-	lexeme* polish = vr.polish_notation(tok);
+	cout << "2) Программа переводит выражение в обратную польскую(постфиксную) запись " << endl;
+	cout << "   Постфиксная запись имеет следующий вид: " << endl;
 
-	cout << "2) Программа переводит выражение в обратную польскую(постфиксную) запись";
+	vector<lexeme> polish = vr.polish_notation(tok);
+
+	for (int i = 0; i < polish.size(); i++)
+	{
+		cout << polish[i] << ' ';
+	}
+
+	cout << "\n\n";
+}
+
+
+void how_it_works()
+{
+	cout << " Введите выражение без пробелов, которое нужно вычислить " << endl;
+	cout << " Переменные вводите без коэффициентов " << endl;
+	cout << "\n\n";
+	string h;
+	arithmetic vr;
+	cin >> h;
+	cout << "\n\n";
+	vector<lexeme> tok = vr.tokenizing(h);
+
+	
+	cout << "1) Выражение разбивается на отдельные лексемы" << endl;
+	cout << "   Введенное выражение состоит из следующих лексем " << endl;
+
+	for (int i = 0; i < tok.size(); i++)
+	{
+		cout << tok[i] << ' ';
+	}
+
+	cout << "\n\n";
+	
+	cout << vr.check(tok, tok.size());
+
+	cout << "2) Выражение проверяется на корректность:\n\n";
+	cout << "3) Программа переводит выражение в обратную польскую(постфиксную) запись " << endl;
 	cout << "   Постфиксная запись имеет следующий вид: " << endl;
 	
-	for (int i = 0; i < vr.getCounteer(); i++)
-	{
-		cout << polish[i] << " ";
-	}
-	cout << "\n\n";
+
+	vector<lexeme> polish = vr.polish_notation(tok);
 	
-	cout << "3) Присвавивание значений переменным(если они есть) и вычисление результата" << endl;
+	for (int i = 0; i < polish.size(); i++)
+	{
+		cout << polish[i] << ' ';
+	}
+
 	cout << "\n\n";
-	cout << vr.calculate(polish, vr.getCounteer());
+	cout << "4) Присваивание значений перменным(если они есть) и вычисление результата " << endl;
+
+	cout << vr.calculate(polish);
+	
+	cout << "\n\n";
+
+	cout << " 1) Посчитать это выражение еще раз " << endl;
+	cout << " 2) Вернуться в главное меню" << endl;
+	cout << " 3) Выйти из прграммы" << endl;
+
+	int p;
+	cout << "  ";
+	cin >> p;
+	cout << "\n";
+
+
+	switch (p)
+	{
+	case 1:
+		povtornoe_vychyslenie_vyrazhenia(polish);
+		break;
+	case 2:
+		main_interface();
+		break;
+	case 3:
+		break;
+	}
 }
 
 void main_interface()
@@ -115,52 +209,43 @@ void main_interface()
 	cout << "1) Демонстрация работы программы" << endl;
 	cout << "2) Вычисление выражения" << endl;
 	cout << "3) Разбиение выражения на лексемы" << endl;
-	cout << "4) Разбиение выражения на лексемы и перевод в обратную польскую запись " << endl;
-}
-int main()
-{
-<<<<<<< HEAD
-	setlocale(LC_ALL, "rus");
-	cout << " ������� ��������� ��� ��������, ������� ����� ��������� " << endl;
-	cout << " ���������� ������� ��� ������������� " << endl;
-	cout << "\n\n";
-	string h;
-	arithmetic vr;
-	cin >> h;
-	cout << "\n\n";
-	cout << "\t\t" << vr.tokenizing_and_polish_notation(h);
+	cout << "4) Разбиение выражения на лексемы и перевод в обраиную польскую запись " << endl;
 
-	cout << "\n\n";
-=======
-	setlocale(LC_ALL, "Rus");
-	cout << "\t\t" <<  "-----------------------------------------------------" << endl;;
-	cout << "\t\t" <<  "| Программа для вычисления арифметических вырыжаний |" << endl;
-	cout << "\t\t"  << "-----------------------------------------------------";
-	cout << "\n\n\n\n";
-	
-	main_interface();
 	int p;
 	cout << "\n";
 	cout << "  ";
 	cin >> p;
 	cout << "\n";
 
+
 	switch (p)
 	{
 	case 1:
 		how_it_works();
 		break;
-
 	case 2:
 		new_calculating();
 		break;
 	case 3:
 		tokenizing();
 		break;
-	case 4: 
+	case 4:
 		tokenizng_and_polish_notation();
 		break;
 	}
->>>>>>> c434110eab1f41d6dfbe87f33a4bdfc0ac00ecef
+
 }
 
+
+int main()
+{
+
+	cout << "\n\n";
+	setlocale(LC_ALL, "Rus");
+	cout << "\t\t" << "-----------------------------------------------------" << endl;;
+	cout << "\t\t" << "| Программа для вычисления арифметических выражений |" << endl;
+	cout << "\t\t" << "-----------------------------------------------------";
+	cout << "\n\n\n\n";
+
+	main_interface();
+}
