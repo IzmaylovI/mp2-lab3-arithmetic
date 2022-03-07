@@ -135,146 +135,152 @@ vector<lexeme> arithmetic::tokenizing(string a)
 	
 	while (a[j] != '\0')
 	{
-		if (a[j] >= '0' && a[j] <= '9')
+		if (a[j] != ' ')
 		{
-			x = 0;
-			d = 10;
-			
-			if (i != 0 && arrt[i - 1].isParameter())
+			if (a[j] >= '0' && a[j] <= '9')
 			{
-				arrt.push_back('*');
-				count++;
-				i++;
-			}
-			while (a[j] >= '0' && a[j] <= '9')
-			{
-				temp = static_cast<double>(a[j] - '0');
-				x = x * 10 + temp;
-				j++;
-			}
-			if (a[j] == '.')
-			{
-				j++;
+				x = 0;
+				d = 10;
 
-				while ((a[j] >= '0' && a[j] <= '9'))
+				if (i != 0 && arrt[i - 1].isParameter())
+				{
+					arrt.push_back('*');
+					count++;
+					i++;
+				}
+				while (a[j] >= '0' && a[j] <= '9')
 				{
 					temp = static_cast<double>(a[j] - '0');
-
-					x += temp / d;
+					x = x * 10 + temp;
 					j++;
-					d *= 10;
 				}
-			}
-			arrt.push_back(x);
-			count++;
-			i++;
-		}
+				if (a[j] == '.')
+				{
+					j++;
 
-		else if (a[j] != '\0' && (a[j] >= 'a' && a[j] <= 'z' || a[j] >= 'A' && a[j] <= 'Z'))
-		{
-			if (i != 0 && arrt[i - 1].isValue())
-			{
+					while ((a[j] >= '0' && a[j] <= '9'))
+					{
+						temp = static_cast<double>(a[j] - '0');
 
-				arrt.push_back('*');
-				i++;
+						x += temp / d;
+						j++;
+						d *= 10;
+					}
+				}
+				arrt.push_back(x);
 				count++;
-			}
-			arrt.push_back(a[j]);
-			count++;
-			i++;
-			j++;
-		}
-		else {
-			if (a[j] == '+')
-			{
-
-				arrt.push_back('+');
-
 				i++;
-				j++;
-				count++;
-			}
-			else if (a[j] == '*')
-			{
-
-				arrt.push_back('*');
-
-				i++;
-				j++;
-				count++;
-			}
-			else if (a[j] == '/')
-			{
-
-				arrt.push_back('/');
-
-				i++;
-				j++;
-				count++;
 			}
 
-			else if (a[j] == '-')
+			else if (a[j] != '\0' && (a[j] >= 'a' && a[j] <= 'z' || a[j] >= 'A' && a[j] <= 'Z'))
 			{
-				if (j == 0 || !arrt[i - 1].isValue() && !arrt[i - 1].isParameter() && arrt[i - 1].getOp() != ")")
+				if (i != 0 && arrt[i - 1].isValue())
 				{
 
-					lexeme z = "un-";
-					arrt.push_back(z);           //???????????????????????????????
-
-					i++;
-					j++;
-					count++;
-				}
-				else {
-
-					arrt.push_back('-');
-					i++;
-					j++;
-					count++;
-				}
-			
-			}
-			else if (a[j] == '(')
-			{
-				if (j != 0 && arrt[i-1].isValue())
-				{
 					arrt.push_back('*');
 					i++;
 					count++;
 				}
-				if (j != 0 && (arrt[i - 1].isValue() || arrt[i - 1].isParameter()))
-				{
-					arrt.push_back('*');
-					i++;
-					count++;
-				}
-
-				arrt.push_back('(');
-				i++;
-				j++;
-				count++;
-			}
-			else if (a[j] == ')')
-			{
-
-				arrt.push_back(')');
-				i++;
-				j++;
-				count++;
-				if (a[j] != '\0' && (a[j] >= '0' && a[j] <= '9' || a[j] >= 'A' && a[j] <= 'Z' || a[j] >= 'a' && a[j] <= 'z'))
-				{
-					arrt.push_back('*');
-					i++;
-					count++;
-				}
-			}
-			else
-	        {
 				arrt.push_back(a[j]);
+				count++;
 				i++;
 				j++;
 			}
+			else {
+				if (a[j] == '+')
+				{
 
+					arrt.push_back('+');
+
+					i++;
+					j++;
+					count++;
+				}
+				else if (a[j] == '*')
+				{
+
+					arrt.push_back('*');
+
+					i++;
+					j++;
+					count++;
+				}
+				else if (a[j] == '/')
+				{
+
+					arrt.push_back('/');
+
+					i++;
+					j++;
+					count++;
+				}
+
+				else if (a[j] == '-')
+				{
+					if (j == 0 || !arrt[i - 1].isValue() && !arrt[i - 1].isParameter() && arrt[i - 1].getOp() != ")")
+					{
+
+						lexeme z = "un-";
+						arrt.push_back(z);           //???????????????????????????????
+
+						i++;
+						j++;
+						count++;
+					}
+					else {
+
+						arrt.push_back('-');
+						i++;
+						j++;
+						count++;
+					}
+
+				}
+				else if (a[j] == '(')
+				{
+					if (j != 0 && arrt[i - 1].isValue())
+					{
+						arrt.push_back('*');
+						i++;
+						count++;
+					}
+					if (j != 0 && (arrt[i - 1].isValue() || arrt[i - 1].isParameter()))
+					{
+						arrt.push_back('*');
+						i++;
+						count++;
+					}
+
+					arrt.push_back('(');
+					i++;
+					j++;
+					count++;
+				}
+				else if (a[j] == ')')
+				{
+
+					arrt.push_back(')');
+					i++;
+					j++;
+					count++;
+					if (a[j] != '\0' && (a[j] >= '0' && a[j] <= '9' || a[j] >= 'A' && a[j] <= 'Z' || a[j] >= 'a' && a[j] <= 'z'))
+					{
+						arrt.push_back('*');
+						i++;
+						count++;
+					}
+				}
+				else
+				{
+					arrt.push_back(a[j]);
+					i++;
+					j++;
+				}
+			}
+		}
+		else
+		{
+		    j++;
 		}
 	}
 	
@@ -293,6 +299,11 @@ int arithmetic::check(vector<lexeme> array, int kol)
 			if (i != kol - 1 && (array[i + 1].getOp() == "un-" || array[i + 1].isValue()))
 			{
 				cout << "После числа стоит небинарный оператор" << endl;
+				count_of_errors++;
+			}
+			else if (array[i].isParameter() && array[i].getParameter() < "A" || (array[i].getParameter() > "Z" && array[i].getParameter() < "a") || array[i].getParameter() > "z")
+			{
+				cout << "  В Выражении присутствует недпустимый символ " << array[i].getParameter() << "\n\n";
 				count_of_errors++;
 			}
 		}
@@ -470,7 +481,7 @@ double arithmetic::calculate(vector<lexeme> arrt)
 			s.push(t);
 		}
 	}
-	return s.pop().getValue();
 
+	return s.pop().getValue();
 }
 //#endif // ! _CALCULATOR_
