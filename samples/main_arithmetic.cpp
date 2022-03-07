@@ -1,6 +1,9 @@
 #include <iostream>
+#include <string>
 #include "arithmetic.h"
 #include "stack.h"
+#include "conio.h"
+#include "stdio.h"
 
 using namespace std;
 
@@ -46,36 +49,46 @@ void new_calculating()
 	cout << "\n\n";
 	string h;
 	arithmetic vr;
-	cin >> h;
+	_flushall();
+	cin.ignore();
+	getline(cin, h);
 	cout << "\n\n";
 	
 	vector<lexeme> tok = vr.tokenizing(h);
 	vector<lexeme> polish = vr.polish_notation(tok);
-	vr.check(tok, tok.size());
-	cout << vr.calculate(polish);
-
-	cout << "\n\n";
-
-	cout << " 1) Посчитать это выражение еще раз " << endl;
-	cout << " 2) Вернуться в главное меню" << endl;
-	cout << " 3) Выйти из программы" << endl;
-
-	int p;
-	cout << "  ";
-	cin >> p;
-	cout << "\n";
-
-
-	switch (p)
+	if (!vr.check(tok, tok.size()))
 	{
-	case 1:
-		povtornoe_vychyslenie_vyrazhenia(polish);
-		break;
-	case 2:
-		main_interface();
-		break;
-	case 3:
-		break;
+		cout << vr.calculate(polish);
+
+		cout << "\n\n";
+
+		cout << " 1) Посчитать это выражение еще раз " << endl;
+		cout << " 2) Вернуться в главное меню" << endl;
+		cout << " 3) Выйти из программы" << endl;
+
+		int p;
+		cout << "  ";
+		cin >> p;
+		cout << "\n";
+
+
+		switch (p)
+		{
+		case 1:
+			povtornoe_vychyslenie_vyrazhenia(polish);
+			break;
+		case 2:
+			main_interface();
+			break;
+		case 3:
+			break;
+		}
+	}
+	else
+	{
+		cout << "  Выражение введено с ошибками !!!" << "\n";
+		cout << "  попробуйте ввести выражение еще раз" << endl;
+		new_calculating();
 	}
 }
 
@@ -87,7 +100,9 @@ void tokenizing()
 	cout << "\n\n";
 	string h;
 	arithmetic vr;
-	cin >> h;
+	_flushall();
+	cin.ignore();
+	getline(cin, h);
 	cout << "\n\n";
 	vector<lexeme> tok = vr.tokenizing(h);
 
@@ -109,7 +124,9 @@ void tokenizng_and_polish_notation()
 	cout << "\n\n";
 	string h;
 	arithmetic vr;
-	cin >> h;
+	_flushall();
+	cin.ignore();
+	getline(cin, h);
 	cout << "\n\n";
 	vector<lexeme> tok = vr.tokenizing(h);
 	
@@ -144,8 +161,11 @@ void how_it_works()
 	cout << "\n\n";
 	string h;
 	arithmetic vr;
-	cin >> h;
+	_flushall();
+	cin.ignore();
+	getline(cin, h);
 	cout << "\n\n";
+	cout << h << "\n\n";
 	vector<lexeme> tok = vr.tokenizing(h);
 
 	
@@ -159,47 +179,55 @@ void how_it_works()
 
 	cout << "\n\n";
 	
-	cout << vr.check(tok, tok.size());
+	//cout << vr.check(tok, tok.size());
 
 	cout << "2) Выражение проверяется на корректность:\n\n";
-	cout << "3) Программа переводит выражение в обратную польскую(постфиксную) запись " << endl;
-	cout << "   Постфиксная запись имеет следующий вид: " << endl;
-	
-
-	vector<lexeme> polish = vr.polish_notation(tok);
-	
-	for (int i = 0; i < polish.size(); i++)
+	if (!vr.check(tok, tok.size()))
 	{
-		cout << polish[i] << ' ';
+		cout << "3) Программа переводит выражение в обратную польскую(постфиксную) запись " << endl;
+		cout << "   Постфиксная запись имеет следующий вид: " << endl;
+
+
+		vector<lexeme> polish = vr.polish_notation(tok);
+
+		for (int i = 0; i < polish.size(); i++)
+		{
+			cout << polish[i] << ' ';
+		}
+
+		cout << "\n\n";
+		cout << "4) Присваивание значений перменным(если они есть) и вычисление результата " << endl;
+
+		cout << vr.calculate(polish);
+
+		cout << "\n\n";
+
+		cout << " 1) Посчитать это выражение еще раз " << endl;
+		cout << " 2) Вернуться в главное меню" << endl;
+		cout << " 3) Выйти из прграммы" << endl;
+
+		int p;
+		cout << "  ";
+		cin >> p;
+		cout << "\n";
+
+
+		switch (p)
+		{
+		case 1:
+			povtornoe_vychyslenie_vyrazhenia(polish);
+			break;
+		case 2:
+			main_interface();
+			break;
+		case 3:
+			break;
+		}
 	}
-
-	cout << "\n\n";
-	cout << "4) Присваивание значений перменным(если они есть) и вычисление результата " << endl;
-
-	cout << vr.calculate(polish);
-	
-	cout << "\n\n";
-
-	cout << " 1) Посчитать это выражение еще раз " << endl;
-	cout << " 2) Вернуться в главное меню" << endl;
-	cout << " 3) Выйти из прграммы" << endl;
-
-	int p;
-	cout << "  ";
-	cin >> p;
-	cout << "\n";
-
-
-	switch (p)
+	else
 	{
-	case 1:
-		povtornoe_vychyslenie_vyrazhenia(polish);
-		break;
-	case 2:
-		main_interface();
-		break;
-	case 3:
-		break;
+		cout << "\n\n  Выражение введено с ошибками!!!!!" << "\n\n";
+		how_it_works();
 	}
 }
 
